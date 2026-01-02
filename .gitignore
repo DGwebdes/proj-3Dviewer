@@ -23,6 +23,9 @@
 # misc
 .DS_Store
 *.pem
+.vscode/
+REFACTORING_BEFORE_AFTER.md
+REFACTORING_SUMMARY.md
 
 # debug
 npm-debug.log*
