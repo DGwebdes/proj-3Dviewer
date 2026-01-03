@@ -1,16 +1,17 @@
 "use client";
 
-import { PropertyDetailProps } from "@/lib/types";
+import { PropertyDetailProps, RoomType } from "@/lib/types";
 import { useState } from "react";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight, Eye, Home } from "lucide-react";
+import Viewer3D from "@/components/3d-viewer/Viewer3D";
 
 export default function PropertyDetail({
     property,
     onBack,
-    onView3D,
 }: PropertyDetailProps) {
     const [currentImage, setCurrentImage] = useState<number>(0);
+    const [activeViewType, setActiveViewType] = useState<RoomType | null>(null);
 
     const nextImage = (): void => {
         setCurrentImage((prev) => (prev + 1) % property.images.length);
@@ -22,6 +23,23 @@ export default function PropertyDetail({
                 (prev - 1 + property.images.length) % property.images.length
         );
     };
+
+    const handleView3D = (type: RoomType): void => {
+        setActiveViewType(type);
+    };
+
+    const handleExit3D = (): void => {
+        setActiveViewType(null);
+    };
+
+    if (activeViewType) {
+        return (
+            <Viewer3D
+                type={activeViewType}
+                onExit={handleExit3D}
+            />
+        );
+    }
 
     return (
         <div className="min-h-screen bg-gray-50">
@@ -47,14 +65,14 @@ export default function PropertyDetail({
 
                         <button
                             onClick={prevImage}
-                            className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/90 p-3 rounded-full hover:bg-white transition-colors"
+                            className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/90 p-3 rounded-full hover:bg-white transition-colors text-stone-600"
                         >
                             <ChevronLeft size={24} />
                         </button>
 
                         <button
                             onClick={nextImage}
-                            className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/90 p-3 rounded-full hover:bg-white transition-colors"
+                            className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/90 p-3 rounded-full hover:bg-white transition-colors text-stone-600"
                         >
                             <ChevronRight size={24} />
                         </button>
@@ -76,7 +94,7 @@ export default function PropertyDetail({
                     <div className="p-8">
                         <div className="flex justify-between items-start mb-6">
                             <div>
-                                <h1 className="text-4xl font-bold mb-2">
+                                <h1 className="text-4xl font-bold mb-2 text-violet-500">
                                     {property.title}
                                 </h1>
                                 <p className="text-xl text-gray-600">
@@ -84,7 +102,7 @@ export default function PropertyDetail({
                                 </p>
                             </div>
                             <div className="text-right">
-                                <div className="text-4xl font-bold text-blue-600">
+                                <div className="text-4xl font-bold text-stone-800">
                                     {property.price}
                                 </div>
                             </div>
@@ -92,19 +110,19 @@ export default function PropertyDetail({
 
                         <div className="grid grid-cols-3 gap-6 mb-8 pb-8 border-b">
                             <div>
-                                <div className="text-3xl font-bold">
+                                <div className="text-3xl font-bold text-stone-700">
                                     {property.beds}
                                 </div>
                                 <div className="text-gray-600">Bedrooms</div>
                             </div>
                             <div>
-                                <div className="text-3xl font-bold">
+                                <div className="text-3xl font-bold text-stone-700">
                                     {property.baths}
                                 </div>
                                 <div className="text-gray-600">Bathrooms</div>
                             </div>
                             <div>
-                                <div className="text-3xl font-bold">
+                                <div className="text-3xl font-bold text-stone-700">
                                     {property.sqft}
                                 </div>
                                 <div className="text-gray-600">Square Feet</div>
@@ -112,7 +130,7 @@ export default function PropertyDetail({
                         </div>
 
                         <div className="mb-8">
-                            <h2 className="text-2xl font-bold mb-4">
+                            <h2 className="text-2xl font-bold mb-4 text-violet-500">
                                 About this property
                             </h2>
                             <p className="text-gray-700 leading-relaxed">
@@ -121,14 +139,14 @@ export default function PropertyDetail({
                         </div>
 
                         <div className="mb-8">
-                            <h2 className="text-2xl font-bold mb-4">
+                            <h2 className="text-2xl font-bold mb-4 text-violet-500">
                                 Features
                             </h2>
                             <div className="flex flex-wrap gap-3">
                                 {property.features.map((feature, i) => (
                                     <span
                                         key={i}
-                                        className="px-4 py-2 bg-blue-50 text-blue-700 rounded-lg font-medium"
+                                        className="px-4 py-2 bg-blue-50 text-violet-700 rounded-lg font-medium"
                                     >
                                         {feature}
                                     </span>
@@ -138,16 +156,16 @@ export default function PropertyDetail({
 
                         <div className="grid grid-cols-2 gap-4">
                             <button
-                                onClick={() => onView3D("interior")}
-                                className="flex items-center justify-center gap-3 bg-linear-to-r from-blue-600 to-blue-700 text-white px-8 py-4 rounded-xl hover:from-blue-700 hover:to-blue-800 transition-all font-semibold text-lg shadow-lg hover:shadow-xl"
+                                onClick={() => handleView3D("interior")}
+                                className="flex items-center justify-center gap-3 bg-linear-to-r from-violet-600 to-violet-700 text-white px-8 py-4 rounded-xl hover:from-violet-700 hover:to-violet-800 transition-all font-semibold text-lg shadow-lg hover:shadow-xl"
                             >
                                 <Eye size={24} />
                                 View Interior in 3D
                             </button>
 
                             <button
-                                onClick={() => onView3D("exterior")}
-                                className="flex items-center justify-center gap-3 bg-linear-to-r from-purple-600 to-purple-700 text-white px-8 py-4 rounded-xl hover:from-purple-700 hover:to-purple-800 transition-all font-semibold text-lg shadow-lg hover:shadow-xl"
+                                onClick={() => handleView3D("exterior")}
+                                className="flex items-center justify-center gap-3 px-8 py-4 rounded-xl text-violet-700 border transition-all font-semibold text-lg shadow-lg hover:shadow-xl"
                             >
                                 <Home size={24} />
                                 View Exterior in 3D

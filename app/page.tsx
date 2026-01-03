@@ -2,54 +2,29 @@
 
 import { useState, ReactNode } from "react";
 import { Home } from "lucide-react";
-import { RoomType, Property, ViewType } from "@/lib/types";
+import { Property } from "@/lib/types";
 import { properties } from "@/lib/sample-data";
-import Viewer3D from "@/components/3d-viewer/Viewer3D";
 import PropertyCard from "@/components/property/PropertyCard";
 import PropertyDetail from "@/components/property/PropertyDetail";
 
 export default function RealEstateViewer(): ReactNode {
-    const [view, setView] = useState<ViewType>("list");
     const [selectedProperty, setSelectedProperty] = useState<Property | null>(
         null
     );
-    const [viewerType, setViewerType] = useState<RoomType | null>(null);
 
     const handlePropertyClick = (property: Property): void => {
         setSelectedProperty(property);
-        setView("detail");
-    };
-
-    const handleView3D = (type: RoomType): void => {
-        setViewerType(type);
-        setView("3d");
     };
 
     const handleBackToList = (): void => {
-        setView("list");
         setSelectedProperty(null);
     };
 
-    const handleExit3D = (): void => {
-        setView("detail");
-        setViewerType(null);
-    };
-
-    if (view === "3d" && viewerType) {
-        return (
-            <Viewer3D
-                type={viewerType}
-                onExit={handleExit3D}
-            />
-        );
-    }
-
-    if (view === "detail" && selectedProperty) {
+    if (selectedProperty) {
         return (
             <PropertyDetail
                 property={selectedProperty}
                 onBack={handleBackToList}
-                onView3D={handleView3D}
             />
         );
     }
@@ -62,9 +37,9 @@ export default function RealEstateViewer(): ReactNode {
                         <div className="flex items-center gap-3">
                             <Home
                                 size={32}
-                                className="text-blue-600"
+                                className="text-violet-600"
                             />
-                            <h1 className="text-3xl font-bold">
+                            <h1 className="text-3xl font-bold text-violet-600">
                                 Luxury Estates
                             </h1>
                         </div>
@@ -77,7 +52,7 @@ export default function RealEstateViewer(): ReactNode {
 
             <main className="max-w-7xl mx-auto px-4 py-12">
                 <div className="mb-8">
-                    <h2 className="text-4xl font-bold mb-2">
+                    <h2 className="text-4xl font-bold mb-2 text-violet-500">
                         Featured Properties
                     </h2>
                     <p className="text-gray-600 text-lg">

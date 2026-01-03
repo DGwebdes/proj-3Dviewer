@@ -1,5 +1,4 @@
 // Type definitions
-export type ViewType = "list" | "detail" | "3d";
 export type RoomType = "interior" | "exterior";
 
 // 3D Room Component
@@ -35,5 +34,4 @@ export interface PropertyCardProps {
 export interface PropertyDetailProps {
     property: Property;
     onBack: () => void;
-    onView3D: (type: RoomType) => void;
 }

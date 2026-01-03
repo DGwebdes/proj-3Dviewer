@@ -16,13 +16,15 @@ export default function PropertyCard({ property, onClick }: PropertyCardProps) {
                     height={400}
                 />
 
-                <div className="absolute top-4 right-4 bg-white px-4 py-2 rounded-full font-bold text-lg">
+                <div className="absolute top-4 right-4 bg-white px-4 py-2 rounded-full font-bold text-lg text-violet-400">
                     {property.price}
                 </div>
             </div>
 
             <div className="p-6">
-                <h3 className="text-2xl font-bold mb-2">{property.title}</h3>
+                <h3 className="text-2xl font-bold mb-2 text-violet-500">
+                    {property.title}
+                </h3>
                 <p className="text-gray-600 mb-4">{property.location}</p>
 
                 <div className="flex gap-6 mb-4 text-sm text-gray-700">
@@ -35,7 +37,7 @@ export default function PropertyCard({ property, onClick }: PropertyCardProps) {
                     {property.features.map((feature, i) => (
                         <span
                             key={i}
-                            className="px-3 py-1 bg-gray-100 rounded-full text-xs"
+                            className="px-3 py-1 bg-gray-100 rounded-full text-xs text-stone-600"
                         >
                             {feature}
                         </span>
