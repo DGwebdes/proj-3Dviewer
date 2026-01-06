@@ -1,11 +1,11 @@
 "use client";
 
 import { useState, ReactNode } from "react";
-import { Home } from "lucide-react";
 import { Property } from "@/lib/types";
 import { properties } from "@/lib/sample-data";
 import PropertyCard from "@/components/property/PropertyCard";
 import PropertyDetail from "@/components/property/PropertyDetail";
+import { Navbar } from "@/components/Navbar";
 
 export default function RealEstateViewer(): ReactNode {
     const [selectedProperty, setSelectedProperty] = useState<Property | null>(
@@ -32,22 +32,7 @@ export default function RealEstateViewer(): ReactNode {
     return (
         <div className="min-h-screen bg-linear-to-br from-gray-50 to-gray-100">
             <header className="bg-white shadow-sm border-b">
-                <div className="max-w-7xl mx-auto px-4 py-6">
-                    <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-3">
-                            <Home
-                                size={32}
-                                className="text-violet-600"
-                            />
-                            <h1 className="text-3xl font-bold text-violet-600">
-                                Luxury Estates
-                            </h1>
-                        </div>
-                        <div className="text-sm text-gray-600">
-                            Premium Properties Collection
-                        </div>
-                    </div>
-                </div>
+                <Navbar />
             </header>
 
             <main className="max-w-7xl mx-auto px-4 py-12">
