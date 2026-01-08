@@ -6,10 +6,7 @@ import Image from "next/image";
 import { ChevronLeft, ChevronRight, Eye, Home } from "lucide-react";
 import Viewer3D from "@/components/3d-viewer/Viewer3D";
 
-export default function PropertyDetail({
-    property,
-    onBack,
-}: PropertyDetailProps) {
+export default function PropertyDetail({ property }: PropertyDetailProps) {
     const [currentImage, setCurrentImage] = useState<number>(0);
     const [activeViewType, setActiveViewType] = useState<RoomType | null>(null);
 
@@ -44,14 +41,6 @@ export default function PropertyDetail({
     return (
         <div className="min-h-screen bg-gray-50">
             <div className="max-w-7xl mx-auto px-4 py-8">
-                <button
-                    onClick={onBack}
-                    className="flex items-center gap-2 text-gray-700 hover:text-black mb-6 transition-colors"
-                >
-                    <ChevronLeft size={20} />
-                    Back to listings
-                </button>
-
                 <div className="bg-white rounded-3xl overflow-hidden shadow-xl">
                     {/* Image Gallery */}
                     <div className="relative h-125 bg-black">

@@ -33,5 +33,4 @@ export interface PropertyCardProps {
 // Property Detail View
 export interface PropertyDetailProps {
     property: Property;
-    onBack: () => void;
 }
