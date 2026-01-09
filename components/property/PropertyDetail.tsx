@@ -48,8 +48,8 @@ export default function PropertyDetail({ property }: PropertyDetailProps) {
                             src={property.images[currentImage]}
                             alt={property.title}
                             className="w-full h-full object-cover"
-                            width={800}
-                            height={500}
+                            fill={true}
+                            loading="eager"
                         />
 
                         <button

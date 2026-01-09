@@ -50,7 +50,7 @@ export default function Viewer3D({ type, onExit }: Viewer3DProps) {
             <div className="w-full h-full">
                 <Canvas
                     ref={canvasRef}
-                    camera={{ position: [0, 1.6, 8], fov: 75 }}
+                    camera={{ position: [0, 1.6, 15], fov: 75 }}
                     shadows
                 >
                     <FirstPersonControls key={type} />
